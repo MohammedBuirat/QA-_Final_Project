@@ -1,0 +1,3 @@
+com\example\QAAPI\Services\CurrencyServiceTestWithMockTests.class
+com\example\QAAPI\Services\CurrencyServiceWithFileTests.class
+com\example\QAAPI\Services\CurrencyServiceWithMySqlTest.class

@@ -1,0 +1,12 @@
+com\example\QAAPI\Models\ExchangeResult.class
+com\example\QAAPI\AppConfig.class
+com\example\QAAPI\Controllers\CurrencyController.class
+com\example\QAAPI\Services\CurrencyService.class
+com\example\QAAPI\Services\FileService.class
+com\example\QAAPI\Models\CountryCurrency.class
+com\example\QAAPI\Repository\ICountryCurrencyRepository.class
+com\example\QAAPI\Repository\H2CurrencyRepository.class
+com\example\QAAPI\Repository\FileCurrencyRepository.class
+com\example\QAAPI\QaApiApplication.class
+com\example\QAAPI\Models\DecimalSeparator.class
+com\example\QAAPI\Repository\MySqlCurrencyRepository.class

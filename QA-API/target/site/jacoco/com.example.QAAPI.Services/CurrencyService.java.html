@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurrencyService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">QA-API</a> &gt; <a href="index.source.html" class="el_package">com.example.QAAPI.Services</a> &gt; <span class="el_source">CurrencyService.java</span></div><h1>CurrencyService.java</h1><pre class="source lang-java linenums">package com.example.QAAPI.Services;
+
+import com.example.QAAPI.Models.CountryCurrency;
+import com.example.QAAPI.Models.DecimalSeparator;
+import com.example.QAAPI.Models.ExchangeResult;
+import com.example.QAAPI.Repository.ICountryCurrencyRepository;
+
+import java.util.List;
+
+public class CurrencyService {
+    private ICountryCurrencyRepository _currencyRepository;
+
+<span class="fc" id="L13">    public CurrencyService(ICountryCurrencyRepository currencyRepository) {</span>
+<span class="fc" id="L14">        _currencyRepository = currencyRepository;</span>
+<span class="fc" id="L15">    }</span>
+
+    public ExchangeResult ExchangeCurrencies(String fromCountry, String fromCurrencyCode
+            ,String resultCountry, String resultCurrencyCode, double amount) {
+        try {
+<span class="fc" id="L20">            ExchangeResult result = new ExchangeResult();</span>
+<span class="fc" id="L21">            CountryCurrency fromCurrency = _currencyRepository.GetCountryCurrency(fromCountry, fromCurrencyCode);</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">            if (fromCurrency == null) {</span>
+<span class="fc" id="L23">                throw new NullPointerException(&quot;No currency for country &quot; + fromCountry);</span>
+            }
+<span class="fc" id="L25">            CountryCurrency toCurrency = _currencyRepository.GetCountryCurrency(resultCountry, resultCurrencyCode);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if (toCurrency == null) {</span>
+<span class="fc" id="L27">                throw new NullPointerException(&quot;No currency for country &quot; + resultCountry);</span>
+            }
+<span class="fc" id="L29">            result.setAmount(amount);</span>
+<span class="fc" id="L30">            double exchangeRate = toCurrency.getOneUSDValue() / fromCurrency.getOneUSDValue();</span>
+<span class="fc" id="L31">            double resultAmount = amount * exchangeRate;</span>
+<span class="fc" id="L32">            result.setRate(exchangeRate);</span>
+<span class="fc" id="L33">            String resultString = GetStringResultForResultAmount(fromCurrency, resultAmount);</span>
+<span class="fc" id="L34">            result.setResult(resultString);</span>
+<span class="fc" id="L35">            return result;</span>
+<span class="fc" id="L36">        } catch (Exception ex) {</span>
+<span class="fc" id="L37">            System.out.println(ex.toString());</span>
+<span class="fc" id="L38">            throw ex;</span>
+        }
+    }
+
+    public List&lt;CountryCurrency&gt; GetAllCurrencies() {
+        try {
+<span class="fc" id="L44">            List&lt;CountryCurrency&gt; currenciesCode = _currencyRepository.GetAllCurrencies();</span>
+<span class="fc" id="L45">            List&lt;String&gt; unAllowedCounties = FileService.readUnAllowedCountries();</span>
+<span class="fc" id="L46">            currenciesCode.removeIf(currency -&gt; unAllowedCounties.contains(currency.getCountryName()));</span>
+<span class="fc" id="L47">            return currenciesCode;</span>
+<span class="nc" id="L48">        } catch (Exception ex) {</span>
+<span class="nc" id="L49">            System.out.println(ex.toString());</span>
+<span class="nc" id="L50">            throw ex;</span>
+        }
+    }
+
+    private String GetStringResultForResultAmount(CountryCurrency c, double amount) {
+<span class="fc" id="L55">        String formattedString = String.format(&quot;%.3f&quot;, amount);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if(c.getDecimalSeparator() == DecimalSeparator.COMMA){</span>
+<span class="fc" id="L57">            formattedString = formattedString.replaceFirst(&quot;\\.&quot;, &quot;,&quot;);</span>
+        }
+<span class="fc" id="L59">        return formattedString;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
