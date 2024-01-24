@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+QA-API,com.example.QAAPI,AppConfig,12,0,0,0,3,0,3,0,3,0
+QA-API,com.example.QAAPI,QaApiApplication,8,0,0,0,3,0,2,0,2,0
+QA-API,com.example.QAAPI.Repository,H2CurrencyRepository,118,0,4,0,35,0,5,0,3,0
+QA-API,com.example.QAAPI.Repository,FileCurrencyRepository,13,34,1,5,6,9,1,5,0,3
+QA-API,com.example.QAAPI.Repository,MySqlCurrencyRepository,6,112,0,4,4,31,0,5,0,3
+QA-API,com.example.QAAPI.Controllers,CurrencyController,36,0,0,0,10,0,3,0,3,0
+QA-API,com.example.QAAPI.Services,CurrencyService,7,110,0,6,3,28,0,8,0,5
+QA-API,com.example.QAAPI.Services,FileService,9,99,0,6,5,22,1,5,1,2
+QA-API,com.example.QAAPI.Models,ExchangeResult,127,24,18,0,1,5,14,7,5,7
+QA-API,com.example.QAAPI.Models,CountryCurrency,172,30,32,0,1,6,24,6,8,6
+QA-API,com.example.QAAPI.Models,DecimalSeparator,0,23,0,2,0,6,0,3,0,2
